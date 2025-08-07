@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Para o Carlos 💖</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #ffe0ec, #f9d5ff);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    h1, h2 {
+      color: #c9184a;
+    }
+    .question {
+      margin: 30px 0;
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    button:hover {
+      background-color: #ff1493;
+    }
+    .hidden {
+      display: none;
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="start">
+    <h1>Oi Carlos! 💌</h1>
+    <p>Sofia fez esse site especialmente pra você... 💖</p>
+    <p>Você está pronto para provar o quanto nos conhece?</p>
+    <button onclick="startQuiz()">Começar Quiz</button>
+  </div>
+
+  <div class="container hidden" id="quiz">
+    <h2>Pergunta <span id="question-number">1</span> de 10</h2>
+    <div class="question" id="question-text"></div>
+    <div id="options"></div>
+  </div>
+
+  <div class="container hidden" id="final">
+    <h1>Parabéns, amor! 🎉</h1>
+    <p>Você completou o quiz e provou que conhece a gente direitinho!</p>
+    <p>Só queria dizer que te amo MUITO 💕</p>
+    <p>Aqui vai um gatinho fofo só pra você:</p>
+    <iframe src="https://www.youtube.com/embed/wUgV5DF3pUU?autoplay=1" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "1. Onde nos conhecemos?",
+        options: ["No Instagram", "No WhatsApp", "No free fire", "No grupo de guilda"],
+        answer: "No grupo de guilda"
+      },
+      {
+        question: "2. O que eu mais gosto?",
+        options: ["Dormir", "Estudar", "Comer", "Jogar"],
+        answer: "Dormir"
+      },
+      {
+        question: "3. Qual o nome do meu time favorito?",
+        options: ["Real Madrid", "Flamengo", "Golden state warriors", "Borussia"],
+        answer: "Flamengo"
+      },
+      {
+        question: "4. Qual minha comida preferida?",
+        options: ["Macarrão", "Pizza", "Strogonoff", "Lasanha"],
+        answer: "Pizza"
+      },
+      {
+        question: "5. Qual o nome da minha melhor amiga?",
+        options: ["Camila", "Karla", "Gaby", "Sarah"],
+        answer: "Sarah"
+      },
+      {
+        question: "6. Qual é o nome do meu dorama preferido?",
+        options: ["Vincenzo", "Alquimia das almas", "Caçadores de demônios", "My name"],
+        answer: "Vincenzo"
+      },
+      {
+        question: "7. Qual a única coisa que eu não odeio entre as opções abaixo?",
+        options: ["Gente que anda devagar na minha frente", "Gente que fica se diminuindo", "Animais", "Gente, todo mundo"],
+        answer: "Animais"
+      },
+      {
+        question: "8. Qual minha cor preferida?",
+        options: ["Preto", "Branco", "Vermelho", "Azul"],
+        answer: "Preto"
+      },
+      {
+        question: "9. Qual o nome do meu irmão?",
+        options: ["Ícaro", "Arthur", "Miguel", "Lucas"],
+        answer: "Miguel"
+      },
+      {
+        question: "10. Quem eu mais amo nesse mundo?",
+        options: ["Minha mãe", "Meus avós", "Meus amigos", "Você, meu amor"],
+        answer: "Você, meu amor"
+      }
+    ];
+
+    let currentQuestion = 0;
+
+    function startQuiz() {
+      document.getElementById('start').classList.add('hidden');
+      document.getElementById('quiz').classList.remove('hidden');
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById('question-number').textContent = currentQuestion + 1;
+      document.getElementById('question-text').textContent = q.question;
+
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+
+      q.options.forEach(option => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => nextQuestion(option);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function nextQuestion(selected) {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        showFinal();
+      }
+    }
+
+    function showFinal() {
+      document.getElementById('quiz').classList.add('hidden');
+      document.getElementById('final').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
