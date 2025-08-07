@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Para o Carlos 💖</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #ffe0ec, #f9d5ff);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    h1, h2 {
+      color: #c9184a;
+    }
+    .question {
+      margin: 30px 0;
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    button:hover {
+      background-color: #ff1493;
+    }
+    .hidden {
+      display: none;
+    }
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="start">
+    <h1>Oi Carlos! 💌</h1>
+    <p>Sofia fez esse site especialmente pra você... 💖</p>
+    <p>Você está pronto para provar o quanto me conhece?</p>
+    <button onclick="startQuiz()">Começar Quiz</button>
+  </div>
+
+  <div class="container hidden" id="quiz">
+    <h2>Pergunta <span id="question-number">1</span> de 10</h2>
+    <div class="question" id="question-text"></div>
+    <div id="options"></div>
+  </div>
+
+  <div class="container hidden" id="final">
+    <h1>Parabéns, amor! 🎉</h1>
+    <p>Você completou o quiz e provou que conhece a gente direitinho!</p>
+    <p>Só queria dizer que te amo MUITO 💕</p>
+    <p>Aqui vai um gatinho fofo só pra você:</p>
+    <iframe src="https://www.youtube.com/embed/wUgV5DF3pUU?autoplay=1" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "Onde nós nos conhecemos?",
+        options: ["Na escola", "No trabalho", "No Instagram", "Num barzinho"],
+        answer: "No Instagram"
+      },
+      {
+        question: "Qual minha comida favorita?",
+        options: ["Pizza", "Sushi", "Lasanha", "Hambúrguer"],
+        answer: "Sushi"
+      },
+      {
+        question: "Qual foi a nossa primeira viagem juntos?",
+        options: ["Praia", "Montanha", "Rio de Janeiro", "Gramado"],
+        answer: "Gramado"
+      },
+      {
+        question: "Qual é a minha cor favorita?",
+        options: ["Rosa", "Azul", "Preto", "Vermelho"],
+        answer: "Rosa"
+      },
+      {
+        question: "Qual o nome do nosso filme favorito?",
+        options: ["A Culpa é das Estrelas", "Up", "La La Land", "Orgulho e Preconceito"],
+        answer: "Up"
+      },
+      {
+        question: "Qual foi a data do nosso primeiro beijo?",
+        options: ["14/02", "12/06", "01/09", "25/12"],
+        answer: "12/06"
+      },
+      {
+        question: "Qual o meu maior medo?",
+        options: ["Altura", "Perder você", "Escuro", "Ficar sozinha"],
+        answer: "Perder você"
+      },
+      {
+        question: "Como eu te chamo carinhosamente?",
+        options: ["Mozão", "Amorim", "Meu bebê", "Lindinho"],
+        answer: "Amorim"
+      },
+      {
+        question: "Qual o nome da música que é a nossa cara?",
+        options: ["Perfect - Ed Sheeran", "Ainda Bem - Marisa Monte", "Shallow - Lady Gaga", "Te Amo - Vanessa da Mata"],
+        answer: "Ainda Bem - Marisa Monte"
+      },
+      {
+        question: "O que eu mais amo em você?",
+        options: ["Seu sorriso", "Seu jeito bobo", "Seu coração", "Tudo"],
+        answer: "Tudo"
+      }
+    ];
+
+    let currentQuestion = 0;
+
+    function startQuiz() {
+      document.getElementById('start').classList.add('hidden');
+      document.getElementById('quiz').classList.remove('hidden');
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById('question-number').textContent = currentQuestion + 1;
+      document.getElementById('question-text').textContent = q.question;
+
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+
+      q.options.forEach(option => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => nextQuestion(option);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function nextQuestion(selected) {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        showFinal();
+      }
+    }
+
+    function showFinal() {
+      document.getElementById('quiz').classList.add('hidden');
+      document.getElementById('final').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
